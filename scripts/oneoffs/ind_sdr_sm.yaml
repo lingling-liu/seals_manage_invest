@@ -1,0 +1,27 @@
+workspace_dir: "D:/MANAGE/SDRResults/output_dem_3s"
+"results_suffix": "base"
+
+# The following are the raster needed for models
+lulc_path: "D:/MANAGE/CommonInputs/RasterInputs//lulc_7755.tif"
+dem_path: "D:/MANAGE/CommonInputs/RasterInputs/dem_con_7755.tif"
+precipitation_raster_path: "D:/MANAGE/CommonInputs/RasterInputs/precipitation_annual_7755.tif"
+erodibility_path: "D:/MANAGE/CommonInputs/RasterInputs/k_factor_7755.tif"
+erosivity_path: "D:/MANAGE/CommonInputs/RasterInputs/rainfall_erosivity_7755.tif"
+
+# The following are the vector needed for models
+watersheds_path: "D:/MANAGE/CommonInputs/watersheds/watersheds_7755_multipart.shp"
+
+# The following are the parameters tables
+biophysical_table_path: "D:/MANAGE/CommonInputs/BiophysicalTables/sdr_parameter_table_onil.csv"
+
+# The following are specific parameters for the models
+threshold_flow_accumulation: 75  # Taken from Onil - 75
+k_param: 2
+sdr_max: 0.8       # DEFAULT_SDR_SDR_MAX
+ic_0_param: 0.5        # DEFAULT_SDR_IC_0_PARAM
+l_max: 122         # DEFAULT_SDR_L_MAX
+drainage_path: ''  # This parameter is optional
+
+# Resource management parameters
+n_workers: 10     # Provide the number of cores to use.
+
