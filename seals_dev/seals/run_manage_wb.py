@@ -18,8 +18,11 @@ if __name__ == '__main__':
     # including where the project_dir and base_data are located.
     # The project_name is used to name the project directory below. If the directory exists, each task will not recreate
     # files that already exist. 
-    p.user_dir = os.path.expanduser('~')        
-    p.extra_dirs = ['Files', 'seals', 'projects']
+    p.user_dir = os.path.expanduser('~')
+   #p.user_dir = r"G:\Shared drives\NatCapTEEMs\Files\base_data\submissions\manage_invest\test_run"
+    print(p.user_dir) # This is the user directory where the project will be created. It is set to the user's home directory by default. You can change it to any directory you want to use for your project.
+    p.extra_dirs = ['Files','seals', 'projects']
+    #p.extra_dirs = ['seals', 'projects']
     #p.project_name = sys.argv[1]
     p.project_name = "Bangladesh"
     # copy input files to specific project folder and base_data folder
@@ -32,6 +35,7 @@ if __name__ == '__main__':
     # # Get project CRS from parameter file
     par_table = pd.read_csv(os.path.join(project_dir, 'inputs', 'project_parameters.csv'))
     p.projected_crs = int(par_table[par_table['parameters'] == "project_crs"]["value"].values[0])        # crs for the project. It should be changed based on location of the country. It is required for InVEST models. We ar using 7755 for IND, 32736 for TZA, 32645 for BGD
+    # p.projected_crs = 54030
     p.crs_string = "ESRI" if p.projected_crs == 54030 else "EPSG"
 
     # p.project_name = p.project_name 32645+ '_' + hb.pretty_time() # If don't you want to recreate everything each time, comment out this line.
@@ -51,7 +55,9 @@ if __name__ == '__main__':
     # Additionally, if you're clever, you can move files generated in your tasks to the right base_data_dir
     # directory so that they are available for future projects and avoids redundant processing.
     # The final directory has to be named base_data to match the naming convention on the google cloud bucket.
-    p.base_data_dir = os.path.join(p.user_dir, 'Files/base_data')
+    # p.base_data_dir = os.path.join(p.user_dir, 'Files/base_data')
+    p.user_dir_teems = r"G:\Shared drives\NatCapTEEMs"
+    p.base_data_dir = os.path.join(p.user_dir_teems, 'Files/base_data/submissions/manage_invest/raw')
 
     # ProjectFlow downloads all files automatically via the p.get_path() function. If you want it to download from a different 
     # bucket than default, provide the name and credentials here. Otherwise uses default public data 'gtap_invest_seals_2023_04_21'.

@@ -17,6 +17,7 @@ import csv
 import hazelbean as hb
 import seals_utils
 import logging
+import shapely
 # Setup logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s %(message)s')
 logger = logging.getLogger()
@@ -135,6 +136,17 @@ def fix_watersheds(watersheds_path, aoi_path, aoi_label, unique_id_field, projec
     clipped_watershed = os.path.join(output_folder, os.path.basename(watersheds_path).replace(".gpkg", f"_{aoi_label}_clipped.gpkg"))
     if not hb.path_exists(clipped_watershed):
         aoi_gdf = gpd.read_file(aoi_path)
+
+        # # CRS match check
+        # if watersheds_gdf.crs != aoi_gdf.crs:
+        #     aoi_gdf = aoi_gdf.to_crs(watersheds_gdf.crs)
+
+        # # Unified AOI geometries
+        # aoi_union = shapely.union_all(aoi_gdf.geometry)
+
+        # # Perform clipping
+        # clipped_gdf = watersheds_gdf.clip(aoi_union, keep_geom_type=False)
+
         clipped_gdf = watersheds_gdf.clip(aoi_gdf, keep_geom_type=False)
         # Change clipped_gdf crs to projected_crs
         if clipped_gdf.crs==None:
